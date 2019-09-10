@@ -1,7 +1,7 @@
-<div>{{playerName}}</div>
+<h3>{{playerName}}</h3>
 <table>
-  <td *ngFor="let column of $boardObj | async; let c=index">
-    <tr *ngFor="let row of column; let r=index"
-        (click)="updateBoard(c, r)"><span>{{row}}</span></tr>
-  </td>
+  <tr *ngFor="let column of $boardObj | async; let c=index">
+    <td *ngFor="let row of column; let r=index"
+        (click)="updateBoard(c, r)"><span>{{row}}</span></td>
+  </tr>
 </table>
