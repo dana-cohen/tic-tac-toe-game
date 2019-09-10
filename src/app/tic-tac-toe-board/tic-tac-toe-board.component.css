@@ -1,0 +1,25 @@
+:host {
+  flex: 1;
+}
+
+table, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table {
+  display: flex;
+  height: 300px;
+  width: 300px;
+}
+
+td {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+}
+
+tr {
+  flex: 1;
+}

@@ -1,0 +1,7 @@
+<div>{{playerName}}</div>
+<table>
+  <td *ngFor="let column of $boardObj | async; let c=index">
+    <tr *ngFor="let row of column; let r=index"
+        (click)="updateBoard(c, r)"><span>{{row}}</span></tr>
+  </td>
+</table>
