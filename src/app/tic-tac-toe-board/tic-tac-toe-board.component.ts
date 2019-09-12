@@ -17,8 +17,10 @@ export class TicTacToeBoardComponent implements OnInit {
     this.$boardObj = this.ticTacToeService.getScoresBoardState();
   }
 
-  updateBoard(column, row) {
-    this.ticTacToeService.updateBoard(this.playerName, column, row);
+  updateBoard(column, row, value) {
+    if (!value) {
+      this.ticTacToeService.updateBoard(this.playerName, column, row);
+    }
   }
 
 }

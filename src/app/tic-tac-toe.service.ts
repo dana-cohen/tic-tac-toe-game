@@ -14,6 +14,7 @@ export class TicTacToeService {
   boardState = new BehaviorSubject(this.currentBoardState);
   private totalScoreObj = { player1: 0, player2: 0 };
   private stateOfCurrentGame =  [0, 0, 0, 0, 0, 0, 0, 0];
+  currentWinner: UserName;
 
   updateBoard(playerName, column, row) {
     const mark = playerName === UserName.PLAYER1 ? 'X' : 'O';
@@ -45,6 +46,12 @@ export class TicTacToeService {
 
     const i = this.stateOfCurrentGame.indexOf(3);
     const j = this.stateOfCurrentGame.indexOf(-3);
+    if (i >= 0) {
+      this.currentWinner = UserName.PLAYER1;
+    }
+    if (j >= 0) {
+      this.currentWinner = UserName.PLAYER2;
+    }
     return i >= 0 || j >= 0;
   }
 
@@ -53,7 +60,6 @@ export class TicTacToeService {
       { player1: this.totalScoreObj.player1 + 1, player2: this.totalScoreObj.player2 } :
       { player1: this.totalScoreObj.player1, player2: this.totalScoreObj.player2 + 1};
     this.totalScore.next(this.totalScoreObj);
-    return true;
   }
 
   noMoreMoves() {
@@ -63,13 +69,16 @@ export class TicTacToeService {
 
   isGameOver(playerName, column, row) {
     const isThereAWinner = this.isThereAWinner(playerName, column, row);
+    let message = 'No winner this time';
     if (isThereAWinner) {
       this.updateScores(playerName);
+      message = `${this.currentWinner.toUpperCase()} has won`;
     }
     if (this.noMoreMoves() || isThereAWinner) {
-      this.stateOfCurrentGame =  [0, 0, 0, 0, 0, 0, 0, 0];
+      this.stateOfCurrentGame = [0, 0, 0, 0, 0, 0, 0, 0];
       this.currentBoardState = _.cloneDeep(EmptyBoardState);
       this.boardState.next(this.currentBoardState);
+      window.alert(message);
     }
   }
 }

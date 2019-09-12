@@ -2,6 +2,6 @@
 <table>
   <tr *ngFor="let column of $boardObj | async; let c=index">
     <td *ngFor="let row of column; let r=index"
-        (click)="updateBoard(c, r)"><span>{{row}}</span></td>
+        (click)="updateBoard(c, r, row)"><span>{{row}}</span></td>
   </tr>
 </table>
